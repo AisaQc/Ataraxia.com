@@ -102,15 +102,7 @@
         const div = document.createElement('div');
         div.className = 'bg-gray-900 p-4 rounded shadow text-white';
 
-        let mainImage = '';
-        if (product.images) {
-          if (Array.isArray(product.images)) {
-            mainImage = product.images[0];
-          } else {
-            const firstOption = product.options ? product.options[0] : Object.keys(product.images)[0];
-            mainImage = product.images[firstOption];
-          }
-        }
+        let mainImage = product.defaultImage || (Array.isArray(product.images) ? product.images[0] : Object.values(product.images)[0]);
 
         let imageHtml = `<img src="${mainImage}" id="img-${i}" class="w-full h-72 object-contain bg-black rounded mb-2" alt="${product.name}" />`;
 
@@ -159,7 +151,7 @@
       const product = products[index];
       if (product.images && typeof product.images === 'object') {
         const image = document.getElementById(`img-${index}`);
-        image.src = product.images[selected];
+        image.src = product.images[selected] || product.defaultImage;
       }
     }
 
@@ -194,3 +186,4 @@
   </script>
 </body>
 </html>
+
