@@ -69,7 +69,7 @@ footer {
 }
 
 .galeria img {
-  height: 100%;        /* Ajusta la imagen al alto del contenedor */
+  height: 380px;        /* Ajusta la imagen al alto del contenedor */
   width: auto;         /* El ancho se adapta proporcionalmente */
   flex-shrink: 0;      /* Evita que las imágenes se reduzcan */
   margin-right: 10px;
