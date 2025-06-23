@@ -69,12 +69,12 @@ footer {
 }
 
 .galeria img {
-  height: 100%;
-  width: auto;
-  min-width: 400px; /* fuerza un tamaño mínimo horizontal para cada imagen */
-  flex-shrink: 0;   /* evita que se reduzcan en el scroll */
-  object-fit: cover;
+  height: 100%;        /* Ajusta la imagen al alto del contenedor */
+  width: auto;         /* El ancho se adapta proporcionalmente */
+  flex-shrink: 0;      /* Evita que las imágenes se reduzcan */
   margin-right: 10px;
+  object-fit: contain; /* Muestra toda la imagen sin recorte */
+  background-color: #000; /* Opcional: relleno negro si la imagen no ocupa todo el ancho */
 }
 
 @keyframes scrollGaleria {
