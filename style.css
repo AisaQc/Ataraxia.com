@@ -56,3 +56,30 @@ footer {
   background-color: #000;
   border-top: 2px solid #444;
 }
+.galeria-container {
+  overflow: hidden;
+  width: 100%;
+  height: 300px; /* o el alto que prefieras */
+  position: relative;
+}
+
+.galeria {
+  display: flex;
+  animation: scrollGaleria 30s linear infinite;
+}
+
+.galeria img {
+  width: auto;
+  height: 100%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+@keyframes scrollGaleria {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
