@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda</title>
+  <title>Tienda Ataraxia</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -24,7 +24,6 @@
   <div class="container mx-auto p-4">
     <h2 class="text-3xl font-bold mb-6 text-center">Tienda Ataraxia</h2>
 
-    <!-- Búsqueda y filtros -->
     <div class="flex flex-wrap gap-4 justify-center mb-6">
       <input id="searchInput" type="text" placeholder="Buscar por nombre o características" class="border px-4 py-2 rounded w-full max-w-md text-black" />
       <select id="filterType" class="border px-4 py-2 rounded text-black">
@@ -35,10 +34,8 @@
       </select>
     </div>
 
-    <!-- Lista de productos -->
     <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
 
-    <!-- Carrito -->
     <div class="fixed bottom-0 right-0 bg-gray-800 shadow-lg p-4 w-full max-w-sm border-t border-gray-600 text-white">
       <h2 class="text-xl font-semibold mb-2">Carrito</h2>
       <ul id="cartItems" class="mb-2"></ul>
@@ -56,8 +53,37 @@
 
   <script>
     const products = [
-      { name: 'Combat Noise', type: 'Vinilo', price: 80, description: 'Frontline Offensive Force, 12" Picture' },
-      { name: 'Heretique', type: 'Vinilo', price: 80, description: 'Bestias Hominum, 12" Incluye bonus track', options: ['Edición Clasica', 'Edición Picture'] }
+      {
+        name: 'Combat Noise',
+        type: 'Vinilo',
+        price: 80,
+        description: 'Frontline Offensive Force, 12\" Picture',
+        images: [
+          'images/combat1.jpg',
+          'images/combat2.jpg',
+          'images/combat3.jpg',
+          'images/combat4.jpg',
+          'images/combat5.jpg'
+        ]
+      },
+      {
+        name: 'Heretique',
+        type: 'Vinilo',
+        price: 80,
+        description: 'Bestias Hominum, 12\" Incluye bonus track',
+        options: ['Edición Clasica', 'Edición Picture'],
+        images: {
+          'Edición Clasica': 'images/heretique1.jpg',
+          'Edición Picture': 'images/heretique2.jpg'
+        },
+        gallery: [
+          'images/heretique1.jpg',
+          'images/heretique2.jpg',
+          'images/heretique3.jpg',
+          'images/heretique4.jpg',
+          'images/heretique5.jpg'
+        ]
+      }
     ];
 
     const cart = [];
@@ -66,10 +92,9 @@
       const list = document.getElementById('productList');
       const search = document.getElementById('searchInput').value.toLowerCase();
       const filter = document.getElementById('filterType').value;
-
       list.innerHTML = '';
 
-      products.filter(p => {
+      products.filter((p) => {
         return (
           (p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search)) &&
           (filter === '' || p.type === filter)
@@ -78,14 +103,33 @@
         const div = document.createElement('div');
         div.className = 'bg-gray-900 p-4 rounded shadow text-white';
 
-        let html = `<h3 class="text-xl font-bold">${product.name}</h3>
+        let imageHtml = '';
+        if (product.images && !Array.isArray(product.images)) {
+          const firstOption = product.options ? product.options[0] : Object.keys(product.images)[0];
+          imageHtml = `<img src="${product.images[firstOption]}" id="img-${i}" class="w-full h-48 object-cover rounded mb-2" alt="${product.name}" />`;
+        }
+
+        let galleryHtml = '';
+        if (product.gallery && Array.isArray(product.gallery)) {
+          galleryHtml = `
+            <div class="flex space-x-2 overflow-x-auto mb-2">
+              ${product.gallery.map(img => `<img src="${img}" class="w-20 h-20 object-cover rounded" alt="${product.name}" />`).join('')}
+            </div>
+          `;
+        }
+
+        let html = `
+          <h3 class="text-xl font-bold mb-2">${product.name}</h3>
+          ${imageHtml}
+          ${galleryHtml}
           <p class="text-sm text-gray-400">${product.type}</p>
           <p class="my-2">${product.description}</p>
-          <p class="font-semibold">S/ ${product.price.toFixed(2)}</p>`;
+          <p class="font-semibold">S/ ${product.price.toFixed(2)}</p>
+        `;
 
         if (product.options) {
-          html += `<select id="opt-${i}" class="my-2 w-full border rounded px-2 py-1 text-black">`;
-          product.options.forEach(opt => {
+          html += `<select id="opt-${i}" class="my-2 w-full border rounded px-2 py-1 text-black" onchange="updateImage(${i})">`;
+          product.options.forEach((opt) => {
             html += `<option value="${opt}">${opt}</option>`;
           });
           html += `</select>`;
@@ -96,6 +140,16 @@
         div.innerHTML = html;
         list.appendChild(div);
       });
+    }
+
+    function updateImage(index) {
+      const select = document.getElementById(`opt-${index}`);
+      const selected = select.value;
+      const product = products[index];
+      if (product.images && typeof product.images === 'object') {
+        const image = document.getElementById(`img-${index}`);
+        image.src = product.images[selected];
+      }
     }
 
     function addToCart(index) {
@@ -112,7 +166,7 @@
       cartList.innerHTML = '';
       let total = 0;
 
-      cart.forEach(item => {
+      cart.forEach((item) => {
         const li = document.createElement('li');
         li.textContent = `${item.name} - S/ ${item.price.toFixed(2)}`;
         cartList.appendChild(li);
