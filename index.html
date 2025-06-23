@@ -61,9 +61,11 @@
   <footer>
     <p>© 2025 Ataraxia Producciones — Sello Independiente</p>
   </footer>
-  <script>
-    const galeria = document.querySelector('.galeria');
-    galeria.innerHTML += galeria.innerHTML; // duplica el contenido
-  </script>
+<script>
+  const galeria = document.querySelector('.galeria');
+  if (galeria) {
+    galeria.innerHTML += galeria.innerHTML; // duplicamos las imágenes
+  }
+</script>
 </body>
 </html>
