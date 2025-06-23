@@ -59,7 +59,7 @@ footer {
 .galeria-container {
   overflow: hidden;
   width: 100%;
-  height: 300px; /* o el alto que prefieras */
+  height: 400px; /* o el alto que prefieras */
   position: relative;
 }
 
