@@ -56,6 +56,42 @@ footer {
   background-color: #000;
   border-top: 2px solid #444;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+.imagen {
+  position: relative;
+  margin-right: 10px;
+  height: 100%;
+}
+
+.imagen img {
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.nombre-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* evita que interfiera con clics */
+}
+
+.imagen:hover .nombre-img {
+  opacity: 1;
+}
+
+
 .galeria-container {
   overflow: hidden;
   width: 100%;
