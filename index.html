@@ -63,8 +63,7 @@
   </footer>
   <script>
     const galeria = document.querySelector('.galeria');
-    const clones = galeria.innerHTML;
-    galeria.innerHTML += clones;
+    galeria.innerHTML += galeria.innerHTML; // duplica el contenido
   </script>
 </body>
 </html>
