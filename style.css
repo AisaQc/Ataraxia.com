@@ -117,6 +117,14 @@ footer {
   height: auto;
   object-fit: contain;
 }
+.logo-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+}
 @keyframes scrollGaleria {
   0% {
     transform: translateX(0%);
