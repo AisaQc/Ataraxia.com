@@ -67,11 +67,10 @@ footer {
   display: flex;
   animation: scrollGaleria 30s linear infinite;
 }
-
 .galeria img {
-  width: auto;
-  height: 400px;
-  margin-right: 10px;
+  height: 100%; /* se adapta a la altura del contenedor */
+  width: auto; /* ancho proporcional */
+  flex-shrink: 0; /* evita que las imágenes se encojan */
   object-fit: cover;
 }
 
