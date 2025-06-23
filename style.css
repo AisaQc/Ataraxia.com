@@ -61,8 +61,9 @@ footer {
 
 .imagen {
   position: relative;
-  margin-right: 10px;
   height: 100%;
+  margin-right: 10px;
+  overflow: hidden;
 }
 
 .imagen img {
@@ -73,24 +74,22 @@ footer {
 
 .nombre-img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6); /* fondo semitransparente */
   color: #fff;
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  padding: 10px 20px;
-  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 0;
   opacity: 0;
   transition: opacity 0.3s ease;
-  pointer-events: none; /* evita que interfiera con clics */
 }
 
 .imagen:hover .nombre-img {
   opacity: 1;
 }
-
 
 .galeria-container {
   overflow: hidden;
