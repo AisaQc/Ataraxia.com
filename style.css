@@ -112,7 +112,11 @@ footer {
   object-fit: contain;
   background-color: #000;
 }
-
+.logo-ataraxia {
+  width: 6rem; /* Ajusta el ancho */
+  height: auto;
+  object-fit: contain;
+}
 @keyframes scrollGaleria {
   0% {
     transform: translateX(0%);
