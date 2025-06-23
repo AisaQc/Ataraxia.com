@@ -65,23 +65,24 @@ footer {
 
 .galeria {
   display: flex;
-  animation: scrollGaleria 30s linear infinite;
+  width: max-content;
+  animation: scrollGaleria 60s linear infinite; /* más lento para suavidad */
 }
 
 .galeria img {
-  height: 380px;        /* Ajusta la imagen al alto del contenedor */
-  width: auto;         /* El ancho se adapta proporcionalmente */
-  flex-shrink: 0;      /* Evita que las imágenes se reduzcan */
+  height: 380px;
+  width: auto;
+  flex-shrink: 0;
   margin-right: 10px;
-  object-fit: contain; /* Muestra toda la imagen sin recorte */
-  background-color: #000; /* Opcional: relleno negro si la imagen no ocupa todo el ancho */
+  object-fit: contain;
+  background-color: #000;
 }
 
 @keyframes scrollGaleria {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%); /* Mover solo la mitad porque duplicaste */
   }
 }
