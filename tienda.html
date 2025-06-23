@@ -83,7 +83,7 @@
       }
     ];
 
-    const cart = [];
+ const cart = [];
 
     function renderProducts() {
       const list = document.getElementById('productList');
@@ -100,17 +100,23 @@
         const div = document.createElement('div');
         div.className = 'bg-gray-900 p-4 rounded shadow text-white';
 
-        let imageHtml = '';
-        if (product.images && !Array.isArray(product.images)) {
-          const firstOption = product.options ? product.options[0] : Object.keys(product.images)[0];
-          imageHtml = `<img src="${product.images[firstOption]}" id="img-${i}" class="w-full h-48 object-cover rounded mb-2" alt="${product.name}" />`;
+        let mainImage = '';
+        if (product.images) {
+          if (Array.isArray(product.images)) {
+            mainImage = product.images[0];
+          } else {
+            const firstOption = product.options ? product.options[0] : Object.keys(product.images)[0];
+            mainImage = product.images[firstOption];
+          }
         }
+
+        let imageHtml = `<img src="${mainImage}" id="img-${i}" class="w-full h-48 object-cover rounded mb-2" alt="${product.name}" />`;
 
         let galleryHtml = '';
         if (product.gallery && Array.isArray(product.gallery)) {
           galleryHtml = `
             <div class="flex space-x-2 overflow-x-auto mb-2">
-              ${product.gallery.map(img => `<img src="${img}" class="w-20 h-20 object-cover rounded" alt="${product.name}" />`).join('')}
+              ${product.gallery.map(img => `<img src="${img}" class="w-20 h-20 object-cover rounded cursor-pointer" onclick="document.getElementById('img-${i}').src='${img}'" alt="${product.name}" />`).join('')}
             </div>
           `;
         }
