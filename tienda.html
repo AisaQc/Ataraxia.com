@@ -110,19 +110,19 @@
           }
         }
 
-        let imageHtml = `<img src="${mainImage}" id="img-${i}" class="w-full h-48 object-cover rounded mb-2" alt="${product.name}" />`;
+        let imageHtml = `<img src="${mainImage}" id="img-${i}" class="w-full h-72 object-contain bg-black rounded mb-2" alt="${product.name}" />`;
 
         let galleryHtml = '';
         if (Array.isArray(product.images)) {
           galleryHtml = `
             <div class="flex space-x-2 overflow-x-auto mb-2">
-              ${product.images.map(img => `<img src="${img}" class="w-20 h-20 object-cover rounded cursor-pointer" onclick="document.getElementById('img-${i}').src='${img}'" alt="${product.name}" />`).join('')}
+              ${product.images.map(img => `<img src="${img}" class="w-24 h-24 object-contain bg-black rounded cursor-pointer" onclick="document.getElementById('img-${i}').src='${img}'" alt="${product.name}" />`).join('')}
             </div>
           `;
         } else if (product.gallery && Array.isArray(product.gallery)) {
           galleryHtml = `
             <div class="flex space-x-2 overflow-x-auto mb-2">
-              ${product.gallery.map(img => `<img src="${img}" class="w-20 h-20 object-cover rounded cursor-pointer" onclick="document.getElementById('img-${i}').src='${img}'" alt="${product.name}" />`).join('')}
+              ${product.gallery.map(img => `<img src="${img}" class="w-24 h-24 object-contain bg-black rounded cursor-pointer" onclick="document.getElementById('img-${i}').src='${img}'" alt="${product.name}" />`).join('')}
             </div>
           `;
         }
