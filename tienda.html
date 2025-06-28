@@ -61,7 +61,7 @@
       {
         name: 'Combat Noise',
         type: 'Vinilo',
-        price: 80,
+        price: 100,
         description: 'Frontline Offensive Force, 12\" Picture',
         images: [
           'images/AP001_2.jpg',
@@ -73,7 +73,7 @@
       {
         name: 'Heretique',
         type: 'Vinilo',
-        price: 80,
+        price: 100,
         description: 'Bestias Hominum, 12\" Incluye bonus track',
         options: ['Edición Clasica', 'Edición Picture'],
         images: {
@@ -111,6 +111,13 @@
 
         let imageHtml = `<img src="${mainImage}" id="img-${i}" class="w-full h-72 object-contain bg-black rounded mb-2" alt="${product.name}" />`;
 
+        let imageHtml = `
+          <div class="relative mb-2">
+            <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded z-10">Incluye envío a todo el Perú</span>
+            <img src="${mainImage}" id="img-${i}" class="w-full h-72 object-contain bg-black rounded" alt="${product.name}" />
+          </div>
+        `;
+        
         let galleryHtml = '';
         if (Array.isArray(product.images)) {
           galleryHtml = `
