@@ -7,6 +7,7 @@ const products = [
     type: 'Vinilo',
     price: 100,
     description: 'Frontline Offensive Force, 12\" Picture',
+    includesShipping: true,
     images: [
       'images/AP001_2.jpg',
       'images/AP001_1.jpg',
@@ -20,6 +21,7 @@ const products = [
     price: 100,
     description: 'Bestias Hominum, 12\" Incluye bonus track',
     options: ['Edición Clasica', 'Edición Picture'],
+    includesShipping: false,
     images: {
       'Edición Clasica': 'images/AP011_3.png',
       'Edición Picture': 'images/AP011_1.png'
@@ -54,9 +56,11 @@ function renderProducts() {
 
     let mainImage = product.defaultImage || (Array.isArray(product.images) ? product.images[0] : Object.values(product.images)[0]);
 
+    let envioHtml = product.includesShipping ? `<span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded z-10">Incluye envío a todo el Perú</span>` : '';
+
     let imageHtml = `
       <div class="relative mb-2">
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded z-10">Incluye envío a todo el Perú</span>
+        ${envioHtml}
         <img src="${mainImage}" id="img-${i}" class="w-full h-72 object-contain bg-black rounded" alt="${product.name}" />
       </div>
     `;
