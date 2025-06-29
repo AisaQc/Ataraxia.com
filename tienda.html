@@ -46,30 +46,40 @@
     <!-- Lista de productos -->
     <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
 
-    <!-- Carrito -->
+    <!-- Carrito: -->
     <div class="fixed bottom-0 right-0 bg-gray-800 shadow-lg p-4 w-full max-w-sm border-t border-gray-600 text-white z-50">
       <h2 class="text-xl font-semibold mb-2">Carrito</h2>
       <ul id="cartItems" class="mb-2"></ul>
       <p class="font-bold">Total: S/ <span id="cartTotal">0.00</span></p>
-
+    
       <!-- Datos de envío -->
       <div id="shippingFormContainer" class="my-4 text-sm"></div>
-
+    
       <!-- Botones de pago -->
       <div class="mt-3 flex flex-wrap gap-2">
         <button onclick="mostrarQRYape()" class="bg-purple-600 text-white px-4 py-2 rounded flex-1">Yape</button>
         <button onclick="mostrarQRPlin()" class="bg-blue-600 text-white px-4 py-2 rounded flex-1">Plin</button>
       </div>
-
+    
       <div class="my-2" id="paypal-button-container"></div>
       <button onclick="mostrarFormularioTarjeta()" class="w-full bg-green-600 mt-2 text-white px-4 py-2 rounded">Pagar con Tarjeta</button>
-
+    
       <!-- Instrucción de envío de voucher -->
       <p class="text-sm text-gray-300 mt-4 text-center">
         Luego de realizar el pago, envía el voucher al <strong>+51 950 559 135</strong> (Ataraxia Producciones - Anali S. Quispe C.).
       </p>
+    
+      <!-- Formulario de confirmación por correo -->
+      <form action="https://formsubmit.co/ataraxia.produc@gmail.com" method="POST" onsubmit="return prepararCorreo()">
+        <input type="hidden" name="_subject" value="Nuevo pedido desde la tienda Ataraxia">
+        <input type="hidden" name="_captcha" value="false">
+        <textarea name="detalle" id="detallePedido" class="hidden"></textarea>
+    
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded w-full mt-4">
+          Confirmar pedido y enviar por correo
+        </button>
+      </form>
     </div>
-  </div>
 
   <!-- Modal Yape -->
   <div id="modalYape" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
