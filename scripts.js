@@ -140,6 +140,7 @@ function updateCart() {
 
   document.getElementById('cartTotal').textContent = total.toFixed(2);
 }
+
 // ========== Pago con Yape ==========
 function mostrarQRYape() {
   document.getElementById('modalYape').classList.remove('hidden');
@@ -162,6 +163,50 @@ function cerrarQRPlin() {
 function mostrarFormularioTarjeta() {
   document.getElementById('formularioTarjeta').classList.remove('hidden');
 }
+
+// ========== Mostrar Formulario de Dirección ==========
+document.addEventListener('DOMContentLoaded', () => {
+  const contenedor = document.getElementById('shippingFormContainer');
+  if (contenedor) {
+    contenedor.innerHTML = `
+      <h3 class="text-lg font-semibold mb-2">Datos de envío (Olva Courier)</h3>
+      <p class="text-sm mb-3 text-yellow-300">Todos los envíos se realizan mediante Olva Courier. Por favor ingrese sus datos completos.</p>
+      <input type="text" id="nombreCompleto" placeholder="Nombre completo" class="mb-2 w-full px-3 py-2 rounded text-black">
+      <input type="text" id="dni" placeholder="DNI" class="mb-2 w-full px-3 py-2 rounded text-black">
+      <input type="text" id="celular" placeholder="Celular" class="mb-2 w-full px-3 py-2 rounded text-black">
+      <select id="departamento" class="mb-2 w-full px-3 py-2 rounded text-black">
+        <option value="">Departamento</option>
+        <option>Lima</option>
+        <option>Arequipa</option>
+        <option>Cusco</option>
+        <option>La Libertad</option>
+        <option>Piura</option>
+        <option>Otro</option>
+      </select>
+      <select id="provincia" class="mb-2 w-full px-3 py-2 rounded text-black">
+        <option value="">Provincia</option>
+        <option>Lima</option>
+        <option>Arequipa</option>
+        <option>Cusco</option>
+        <option>Trujillo</option>
+        <option>Piura</option>
+      </select>
+      <select id="distrito" class="mb-2 w-full px-3 py-2 rounded text-black">
+        <option value="">Distrito</option>
+        <option>Miraflores</option>
+        <option>San Isidro</option>
+        <option>Cercado</option>
+        <option>Yanahuara</option>
+        <option>Otros</option>
+      </select>
+      <input type="text" id="direccion" placeholder="Dirección exacta" class="mb-2 w-full px-3 py-2 rounded text-black">
+      <select id="pais" class="mb-4 w-full px-3 py-2 rounded text-black">
+        <option value="Perú">Perú</option>
+        <option>Otro</option>
+      </select>
+    `;
+  }
+});
 
 // ========== Configuración de PayPal ==========
 if (window.paypal) {
