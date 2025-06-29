@@ -6,7 +6,7 @@ const products = [
     name: 'Combat Noise',
     type: 'Vinilo',
     price: 100,
-    description: 'Frontline Offensive Force, 12\" Picture',
+    description: 'Frontline Offensive Force, 12" Picture',
     includesShipping: true,
     images: [
       'images/AP001_2.jpg',
@@ -19,7 +19,7 @@ const products = [
     name: 'Heretique',
     type: 'Vinilo',
     price: 100,
-    description: 'Bestias Hominum, 12\" Incluye bonus track',
+    description: 'Bestias Hominum, 12" Incluye bonus track',
     options: ['Edición Clasica', 'Edición Picture'],
     includesShipping: false,
     images: {
@@ -159,9 +159,9 @@ function cerrarQRPlin() {
   document.getElementById('modalPlin').classList.add('hidden');
 }
 
-// ========== Pago con Tarjeta (próximamente) ==========
-function pagarConTarjeta() {
-  alert('El pago con tarjeta está en desarrollo. Por favor usa PayPal, Yape o Plin.');
+// ========== Pago con Tarjeta ==========
+function mostrarFormularioTarjeta() {
+  document.getElementById('formularioTarjeta').classList.remove('hidden');
 }
 
 // ========== Configuración de PayPal ==========
