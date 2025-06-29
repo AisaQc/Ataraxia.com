@@ -146,9 +146,18 @@ function cerrarQRYape() {
   document.getElementById('modalYape').classList.add('hidden');
 }
 
+// ========== Pago con Plin ==========
+function mostrarQRPlin() {
+  document.getElementById('modalPlin').classList.remove('hidden');
+}
+
+function cerrarQRPlin() {
+  document.getElementById('modalPlin').classList.add('hidden');
+}
+
 // ========== Pago con Tarjeta (próximamente) ==========
 function pagarConTarjeta() {
-  alert('El pago con tarjeta está en desarrollo. Por favor usa PayPal o Yape.');
+  alert('El pago con tarjeta está en desarrollo. Por favor usa PayPal, Yape o Plin.');
 }
 
 // ========== Configuración de PayPal ==========
