@@ -121,7 +121,13 @@ function addToCart(index) {
   const selectedOption = product.options ? document.getElementById(`opt-${index}`).value : null;
   const name = selectedOption ? `${product.name} - ${selectedOption}` : product.name;
 
-  cart.push({ name, price: product.price });
+  const existingItem = cart.find(item => item.name === name);
+  if (existingItem) {
+    existingItem.quantity = (existingItem.quantity || 1) + 1;
+  } else {
+    cart.push({ name, price: product.price || 0, quantity: 1 });
+  }
+
   updateCart();
 }
 
