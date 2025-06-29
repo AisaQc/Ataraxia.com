@@ -225,6 +225,33 @@ if (window.paypal) {
   }).render('#paypal-button-container');
 }
 
+// ========== Preparar y enviar pedido por correo ==========
+function prepararCorreo() {
+  const nombre = document.getElementById('nombreCompleto')?.value || '';
+  const dni = document.getElementById('dni')?.value || '';
+  const celular = document.getElementById('celular')?.value || '';
+  const departamento = document.getElementById('departamento')?.value || '';
+  const provincia = document.getElementById('provincia')?.value || '';
+  const distrito = document.getElementById('distrito')?.value || '';
+  const direccion = document.getElementById('direccion')?.value || '';
+  const pais = document.getElementById('pais')?.value || '';
+
+  let detalles = `📦 NUEVO PEDIDO:\n\n`;
+  detalles += `🧾 PRODUCTOS:\n`;
+  cart.forEach(item => {
+    detalles += `- ${item.name} - S/ ${item.price.toFixed(2)}\n`;
+  });
+  detalles += `\n💰 TOTAL: S/ ${document.getElementById('cartTotal').textContent}\n\n`;
+
+  detalles += `🚚 DATOS DE ENVÍO:\n`;
+  detalles += `👤 Nombre: ${nombre}\n`;
+  detalles += `🪪 DNI: ${dni}\n`;
+  detalles += `📱 Celular: ${celular}\n`;
+  detalles += `🌍 Dirección: ${direccion}, ${distrito}, ${provincia}, ${departamento}, ${pais}\n`;
+
+  document.getElementById('detallePedido').value = detalles;
+  return true; // Permite el envío del formulario
+}
 // ========== Inicialización ==========
 document.getElementById('searchInput').addEventListener('input', renderProducts);
 document.getElementById('filterType').addEventListener('change', renderProducts);
