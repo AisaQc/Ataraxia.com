@@ -1,10 +1,12 @@
+// scripts.js
+
 // ========== Datos de Productos ==========
 const products = [
   {
     name: 'Combat Noise',
     type: 'Vinilo',
     price: 100,
-    description: 'Frontline Offensive Force, 12" Picture',
+    description: 'Frontline Offensive Force, 12\" Picture',
     images: [
       'images/AP001_2.jpg',
       'images/AP001_1.jpg',
@@ -16,7 +18,7 @@ const products = [
     name: 'Heretique',
     type: 'Vinilo',
     price: 100,
-    description: 'Bestias Hominum, 12" Incluye bonus track',
+    description: 'Bestias Hominum, 12\" Incluye bonus track',
     options: ['Edición Clasica', 'Edición Picture'],
     images: {
       'Edición Clasica': 'images/AP011_3.png',
@@ -41,10 +43,12 @@ function renderProducts() {
   const filter = document.getElementById('filterType').value;
   list.innerHTML = '';
 
-  products.filter(p =>
-    (p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search)) &&
-    (filter === '' || p.type === filter)
-  ).forEach((product, i) => {
+  products.filter((p) => {
+    return (
+      (p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search)) &&
+      (filter === '' || p.type === filter)
+    );
+  }).forEach((product, i) => {
     const div = document.createElement('div');
     div.className = 'bg-gray-900 p-4 rounded shadow text-white';
 
@@ -83,7 +87,7 @@ function renderProducts() {
 
     if (product.options) {
       html += `<select id="opt-${i}" class="my-2 w-full border rounded px-2 py-1 text-black" onchange="updateImage(${i})">`;
-      product.options.forEach(opt => {
+      product.options.forEach((opt) => {
         html += `<option value="${opt}">${opt}</option>`;
       });
       html += `</select>`;
@@ -96,7 +100,7 @@ function renderProducts() {
   });
 }
 
-// ========== Actualizar Imagen por Opción ==========
+// ========== Actualizar Imagen según Opción ==========
 function updateImage(index) {
   const select = document.getElementById(`opt-${index}`);
   const selected = select.value;
@@ -107,7 +111,7 @@ function updateImage(index) {
   }
 }
 
-// ========== Agregar Producto al Carrito ==========
+// ========== Agregar al Carrito ==========
 function addToCart(index) {
   const product = products[index];
   const selectedOption = product.options ? document.getElementById(`opt-${index}`).value : null;
@@ -117,7 +121,7 @@ function addToCart(index) {
   updateCart();
 }
 
-// ========== Actualizar Lista del Carrito ==========
+// ========== Actualizar Vista del Carrito ==========
 function updateCart() {
   const cartList = document.getElementById('cartItems');
   cartList.innerHTML = '';
@@ -134,19 +138,21 @@ function updateCart() {
 }
 
 // ========== Pago con Yape ==========
-function pagarConYape() {
-  alert('Para pagar con Yape, escanea el QR o comunícate con nosotros.');
+function mostrarQRYape() {
+  document.getElementById('modalYape').classList.remove('hidden');
 }
 
-// ========== Pago con Tarjeta ==========
+function cerrarQRYape() {
+  document.getElementById('modalYape').classList.add('hidden');
+}
+
+// ========== Pago con Tarjeta (próximamente) ==========
 function pagarConTarjeta() {
   alert('El pago con tarjeta está en desarrollo. Por favor usa PayPal o Yape.');
 }
 
-// ========== Integración PayPal ==========
-function inicializarPaypal() {
-  if (!window.paypal || !paypal.Buttons) return;
-
+// ========== Configuración de PayPal ==========
+if (window.paypal) {
   paypal.Buttons({
     createOrder: function(data, actions) {
       const total = document.getElementById('cartTotal').textContent;
@@ -158,18 +164,11 @@ function inicializarPaypal() {
       return actions.order.capture().then(function(details) {
         alert('Gracias por tu compra, ' + details.payer.name.given_name);
       });
-    },
-    onError: function(err) {
-      console.error('Error en PayPal:', err);
-      alert('Ocurrió un error con PayPal.');
     }
   }).render('#paypal-button-container');
 }
 
-// ========== Inicialización Global ==========
-document.addEventListener('DOMContentLoaded', () => {
-  renderProducts();
-  inicializarPaypal();
-  document.getElementById('searchInput').addEventListener('input', renderProducts);
-  document.getElementById('filterType').addEventListener('change', renderProducts);
-});
+// ========== Inicialización ==========
+document.getElementById('searchInput').addEventListener('input', renderProducts);
+document.getElementById('filterType').addEventListener('change', renderProducts);
+document.addEventListener('DOMContentLoaded', renderProducts);
