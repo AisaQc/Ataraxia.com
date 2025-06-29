@@ -140,7 +140,6 @@ function updateCart() {
 
   document.getElementById('cartTotal').textContent = total.toFixed(2);
 }
-
 // ========== Pago con Yape ==========
 function mostrarQRYape() {
   document.getElementById('modalYape').classList.remove('hidden');
