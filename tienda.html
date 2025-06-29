@@ -77,23 +77,25 @@
     <p>© 2025 Ataraxia Producciones — Sello Independiente</p>
   </footer>
 
-<!-- Modal Yape -->
-<div id="modalYape" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-  <div class="bg-white p-4 rounded text-center max-w-sm w-full">
-    <h2 class="text-xl font-semibold mb-2">Pagar con Yape</h2>
-    <img src="images/yape-qr.png" alt="QR Yape" class="mx-auto w-60 h-60 object-contain border border-purple-600" />
-    <button onclick="cerrarQRYape()" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded">Cerrar</button>
+  <!-- Modal Yape -->
+  <div id="modalYape" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-4 rounded shadow-lg text-center">
+      <h3 class="text-lg font-bold mb-2">Pago con Yape</h3>
+      <img src="images/yape_qr.png" alt="QR Yape" class="w-48 mx-auto mb-2" />
+      <p>Escanea el QR y envía el voucher a <strong>950 559 132</strong></p>
+      <button onclick="cerrarQRYape()" class="mt-4 px-4 py-2 bg-purple-600 text-white rounded">Cerrar</button>
+    </div>
   </div>
-</div>
-
-<!-- Modal Plin -->
-<div id="modalPlin" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-  <div class="bg-white p-4 rounded text-center max-w-sm w-full">
-    <h2 class="text-xl font-semibold mb-2">Pagar con Plin</h2>
-    <img src="images/plin-qr.png" alt="QR Plin" class="mx-auto w-60 h-60 object-contain border border-blue-600" />
-    <button onclick="cerrarQRPlin()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">Cerrar</button>
+  
+  <!-- Modal Plin -->
+  <div id="modalPlin" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-4 rounded shadow-lg text-center">
+      <h3 class="text-lg font-bold mb-2">Pago con Plin</h3>
+      <img src="images/plin_qr.png" alt="QR Plin" class="w-48 mx-auto mb-2" />
+      <p>Escanea el QR y envía el voucher a <strong>950 559 132</strong></p>
+      <button onclick="cerrarQRPlin()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">Cerrar</button>
+    </div>
   </div>
-</div>
   
 </body>
 </html>
