@@ -133,9 +133,9 @@ function updateCart() {
 
   cart.forEach((item) => {
     const li = document.createElement('li');
-    li.textContent = `${item.name} - S/ ${item.price.toFixed(2)}`;
+    li.textContent = `${item.name} x${item.quantity} - S/ ${(item.price * item.quantity).toFixed(2)}`;
     cartList.appendChild(li);
-    total += item.price;
+    total += item.price * item.quantity;
   });
 
   document.getElementById('cartTotal').textContent = total.toFixed(2);
@@ -252,6 +252,7 @@ function prepararCorreo() {
   document.getElementById('detallePedido').value = detalles;
   return true; // Permite el envío del formulario
 }
+
 // ========== Inicialización ==========
 document.getElementById('searchInput').addEventListener('input', renderProducts);
 document.getElementById('filterType').addEventListener('change', renderProducts);
