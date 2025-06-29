@@ -152,4 +152,3 @@ document.getElementById('searchInput').addEventListener('input', renderProducts)
 document.getElementById('filterType').addEventListener('change', renderProducts);
 
 document.addEventListener('DOMContentLoaded', renderProducts);
-
