@@ -183,41 +183,32 @@ function mostrarQRPlin() {
 function cerrarQRPlin() {
   document.getElementById('modalPlin').classList.add('hidden');
 }
+// ========== Configuración Culqi ==========
+Culqi.publicKey = 'pk_test_JU0mHZrOyH3E49Xc'; // usa tu llave pública de prueba
 
-// ========== Pago con Tarjeta (Culqi)==========
 function pagarConCulqi() {
-  paymentMethod = 'tarjeta';
-  updateCart();
-
-  const { total } = calcularTotal();
-
-  Culqi.publicKey = 'pk_test_JU0mHZrOyH3E49Xc'; // reemplaza esto
-  Culqi.options({
-    lang: 'auto',
-    modal: true,
-    style: {
-      logo: 'https://ataraxia.com/logo.png', // opcional
-      maincolor: '#4F46E5',
-      buttontext: 'Pagar S/ ' + total.toFixed(2)
-    }
-  });
-
-  Culqi.open({
-    title: 'Tienda Ataraxia',
+  const total = calcularTotal().total.toFixed(2);
+  Culqi.settings({
+    title: 'Ataraxia Producciones',
     currency: 'PEN',
-    description: 'Pedido en línea',
-    amount: Math.round(total * 100), // en céntimos
+    description: 'Pago con tarjeta',
+    amount: parseInt(total * 100), // en céntimos
   });
+  Culqi.open();
 }
+
 function culqi() {
   if (Culqi.token) {
     const token = Culqi.token.id;
-    alert('Token generado: ' + token + '\nAhora debes enviarlo a tu backend para procesar el pago.');
-    // Aquí deberías enviar el token al servidor para completar el cobro (no se puede hacer directamente desde frontend).
+    console.log('Token generado:', token);
+    alert('Token generado correctamente: ' + token + '\nEnviaremos este token a tu servidor para procesar el pago.');
+    // Aquí puedes hacer una solicitud POST a tu backend con el token
   } else {
-    alert('Pago cancelado o fallido: ' + Culqi.error.user_message);
+    console.error('Error en el token:', Culqi.error);
+    alert(Culqi.error.user_message);
   }
 }
+
 // ========== Mostrar Formulario de Dirección ==========
 document.addEventListener('DOMContentLoaded', () => {
   const contenedor = document.getElementById('shippingFormContainer');
