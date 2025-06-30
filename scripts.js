@@ -131,21 +131,27 @@ function addToCart(index) {
 
   updateCart();
 }
+// ========== Calcular Total ==========
+function calcularTotal() {
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += item.price * item.quantity;
+  });
+  return ['paypal', 'tarjeta'].includes(paymentMethod) ? subtotal * 1.05 : subtotal;
+}
 
 // ========== Actualizar Vista del Carrito ==========
 function updateCart() {
   const cartList = document.getElementById('cartItems');
   cartList.innerHTML = '';
-  let subtotal = 0;
 
   cart.forEach((item) => {
     const li = document.createElement('li');
     li.textContent = `${item.name} x${item.quantity} - S/ ${(item.price * item.quantity).toFixed(2)}`;
     cartList.appendChild(li);
-    subtotal += item.price * item.quantity;
   });
 
-  let total = ['paypal', 'tarjeta'].includes(paymentMethod) ? subtotal * 1.05 : subtotal;
+  const total = calcularTotal();
   document.getElementById('cartTotal').textContent = total.toFixed(2);
 }
 
@@ -228,7 +234,7 @@ if (window.paypal) {
     createOrder: function(data, actions) {
       paymentMethod = 'paypal';
       updateCart();
-      const total = document.getElementById('cartTotal').textContent;
+      const total = calcularTotal().toFixed(2);
       return actions.order.create({
         purchase_units: [{ amount: { value: total } }]
       });
