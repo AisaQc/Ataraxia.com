@@ -9,7 +9,7 @@ exports.handler = async (event) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer sk_test_xxxxxxxxxxxxxxxxxxx' // Reemplaza con tu clave privada
+      'Authorization': 'Bearer sk_test_b5LIGqDzzHRolhgr' // Reemplaza con tu clave privada
     },
     body: JSON.stringify({
       amount: monto,
