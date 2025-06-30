@@ -200,12 +200,28 @@ function pagarConCulqi() {
 function culqi() {
   if (Culqi.token) {
     const token = Culqi.token.id;
-    console.log('Token generado:', token);
-    alert('Token generado correctamente: ' + token + '\nEnviaremos este token a tu servidor para procesar el pago.');
-    // Aquí puedes hacer una solicitud POST a tu backend con el token
+    const { subtotal, comision, total } = calcularTotal();
+    const correo = "cliente@email.com"; // puedes obtenerlo de un input
+
+    fetch('/.netlify/functions/procesar-pago', {
+      method: 'POST',
+      body: JSON.stringify({
+        token,
+        monto: total * 100,
+        correo,
+        descripcion: 'Compra en Tienda Ataraxia'
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.data && data.data.object === 'charge') {
+        alert('Pago exitoso 🎉');
+      } else {
+        alert('Error: ' + data.message);
+      }
+    });
   } else {
-    console.error('Error en el token:', Culqi.error);
-    alert(Culqi.error.user_message);
+    alert('Error: ' + Culqi.error.user_message);
   }
 }
 
