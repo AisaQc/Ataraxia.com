@@ -37,6 +37,7 @@ const products = [
 ];
 
 const cart = [];
+let paymentMethod = 'default';
 
 // ========== Renderizar Productos ==========
 function renderProducts() {
@@ -123,9 +124,9 @@ function addToCart(index) {
 
   const existingItem = cart.find(item => item.name === name);
   if (existingItem) {
-    existingItem.quantity = (existingItem.quantity || 1) + 1;
+    existingItem.quantity += 1;
   } else {
-    cart.push({ name, price: product.price || 0, quantity: 1 });
+    cart.push({ name, price: product.price, quantity: 1 });
   }
 
   updateCart();
@@ -144,7 +145,7 @@ function updateCart() {
     subtotal += item.price * item.quantity;
   });
 
-  let total = paymentMethod === 'paypal' ? subtotal * 1.05 : subtotal;
+  let total = ['paypal', 'tarjeta'].includes(paymentMethod) ? subtotal * 1.05 : subtotal;
   document.getElementById('cartTotal').textContent = total.toFixed(2);
 }
 
@@ -225,6 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
 if (window.paypal) {
   paypal.Buttons({
     createOrder: function(data, actions) {
+      paymentMethod = 'paypal';
+      updateCart();
       const total = document.getElementById('cartTotal').textContent;
       return actions.order.create({
         purchase_units: [{ amount: { value: total } }]
