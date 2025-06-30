@@ -131,6 +131,7 @@ function addToCart(index) {
 
   updateCart();
 }
+
 // ========== Calcular Total ==========
 function calcularTotal() {
   let subtotal = 0;
