@@ -236,23 +236,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ========== Configuración de PayPal ==========
-if (window.paypal) {
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      paymentMethod = 'paypal';
-      updateCart();
-      const total = calcularTotal().toFixed(2);
-      return actions.order.create({
-        purchase_units: [{ amount: { value: total } }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        alert('Gracias por tu compra, ' + details.payer.name.given_name);
-      });
-    }
-  }).render('#paypal-button-container');
-}
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.paypal) {
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        paymentMethod = 'paypal';
+        updateCart();
+        const total = calcularTotal().total.toFixed(2);
+        return actions.order.create({
+          purchase_units: [{ amount: { value: total } }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Gracias por tu compra, ' + details.payer.name.given_name);
+        });
+      }
+    }).render('#paypal-button-container');
+  }
+});
 
 // ========== Preparar y enviar pedido por correo ==========
 function prepararCorreo() {
