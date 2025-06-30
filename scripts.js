@@ -150,6 +150,8 @@ function updateCart() {
 
 // ========== Pago con Yape ==========
 function mostrarQRYape() {
+  paymentMethod = 'yape';
+  updateCart();
   document.getElementById('modalYape').classList.remove('hidden');
 }
 
@@ -159,6 +161,8 @@ function cerrarQRYape() {
 
 // ========== Pago con Plin ==========
 function mostrarQRPlin() {
+  paymentMethod = 'plin';
+  updateCart();
   document.getElementById('modalPlin').classList.remove('hidden');
 }
 
@@ -168,6 +172,8 @@ function cerrarQRPlin() {
 
 // ========== Pago con Tarjeta ==========
 function mostrarFormularioTarjeta() {
+  paymentMethod = 'tarjeta';
+  updateCart();
   document.getElementById('formularioTarjeta').classList.remove('hidden');
 }
 
