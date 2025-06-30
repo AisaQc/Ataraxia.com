@@ -184,15 +184,21 @@ function cerrarQRPlin() {
   document.getElementById('modalPlin').classList.add('hidden');
 }
 // ========== Configuración Culqi ==========
-Culqi.publicKey = 'pk_test_JU0mHZrOyH3E49Xc'; // usa tu llave pública de prueba
+window.addEventListener('load', () => {
+  const btnCulqi = document.getElementById('btn-pagar-culqi');
+  if (btnCulqi) {
+    btnCulqi.addEventListener('click', pagarConCulqi);
+  }
+});
 
 function pagarConCulqi() {
   const total = calcularTotal().total.toFixed(2);
+  Culqi.publicKey = 'pk_test_JU0mHZrOyH3E49Xc'; // llave pública
   Culqi.settings({
     title: 'Ataraxia Producciones',
     currency: 'PEN',
     description: 'Pago con tarjeta',
-    amount: parseInt(total * 100), // en céntimos
+    amount: parseInt(total * 100), // céntimos
   });
   Culqi.open();
 }
@@ -201,10 +207,11 @@ function culqi() {
   if (Culqi.token) {
     const token = Culqi.token.id;
     const { subtotal, comision, total } = calcularTotal();
-    const correo = "cliente@email.com"; // puedes obtenerlo de un input
+    const correo = "cliente@email.com"; // o usar un input
 
     fetch('/.netlify/functions/procesar-pago', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         token,
         monto: total * 100,
