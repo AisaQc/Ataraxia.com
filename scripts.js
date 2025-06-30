@@ -135,15 +135,16 @@ function addToCart(index) {
 function updateCart() {
   const cartList = document.getElementById('cartItems');
   cartList.innerHTML = '';
-  let total = 0;
+  let subtotal = 0;
 
   cart.forEach((item) => {
     const li = document.createElement('li');
     li.textContent = `${item.name} x${item.quantity} - S/ ${(item.price * item.quantity).toFixed(2)}`;
     cartList.appendChild(li);
-    total += item.price * item.quantity;
+    subtotal += item.price * item.quantity;
   });
 
+  let total = paymentMethod === 'paypal' ? subtotal * 1.05 : subtotal;
   document.getElementById('cartTotal').textContent = total.toFixed(2);
 }
 
