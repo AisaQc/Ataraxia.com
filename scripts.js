@@ -232,6 +232,9 @@ function culqi() {
   }
 }
 
+// Registrar función culqi globalmente para Culqi
+window.culqi = culqi;
+
 // ========== Mostrar Formulario de Dirección ==========
 document.addEventListener('DOMContentLoaded', () => {
   const contenedor = document.getElementById('shippingFormContainer');
