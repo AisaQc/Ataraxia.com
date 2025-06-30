@@ -184,11 +184,30 @@ function cerrarQRPlin() {
   document.getElementById('modalPlin').classList.add('hidden');
 }
 
-// ========== Pago con Tarjeta ==========
-function mostrarFormularioTarjeta() {
+// ========== Pago con Tarjeta (Culqi)==========
+function pagarConCulqi() {
   paymentMethod = 'tarjeta';
   updateCart();
-  document.getElementById('formularioTarjeta').classList.remove('hidden');
+
+  const { total } = calcularTotal();
+
+  Culqi.publicKey = 'tu_llave_publica_aquí'; // reemplaza esto
+  Culqi.options({
+    lang: 'auto',
+    modal: true,
+    style: {
+      logo: 'https://ataraxia.com/logo.png', // opcional
+      maincolor: '#4F46E5',
+      buttontext: 'Pagar S/ ' + total.toFixed(2)
+    }
+  });
+
+  Culqi.open({
+    title: 'Tienda Ataraxia',
+    currency: 'PEN',
+    description: 'Pedido en línea',
+    amount: Math.round(total * 100), // en céntimos
+  });
 }
 
 // ========== Mostrar Formulario de Dirección ==========
