@@ -191,7 +191,7 @@ function pagarConCulqi() {
 
   const { total } = calcularTotal();
 
-  Culqi.publicKey = 'tu_llave_publica_aquí'; // reemplaza esto
+  Culqi.publicKey = 'pk_test_JU0mHZrOyH3E49Xc'; // reemplaza esto
   Culqi.options({
     lang: 'auto',
     modal: true,
@@ -209,7 +209,15 @@ function pagarConCulqi() {
     amount: Math.round(total * 100), // en céntimos
   });
 }
-
+function culqi() {
+  if (Culqi.token) {
+    const token = Culqi.token.id;
+    alert('Token generado: ' + token + '\nAhora debes enviarlo a tu backend para procesar el pago.');
+    // Aquí deberías enviar el token al servidor para completar el cobro (no se puede hacer directamente desde frontend).
+  } else {
+    alert('Pago cancelado o fallido: ' + Culqi.error.user_message);
+  }
+}
 // ========== Mostrar Formulario de Dirección ==========
 document.addEventListener('DOMContentLoaded', () => {
   const contenedor = document.getElementById('shippingFormContainer');
