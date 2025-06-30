@@ -137,7 +137,8 @@ function calcularTotal() {
   cart.forEach(item => {
     subtotal += item.price * item.quantity;
   });
-  return ['paypal', 'tarjeta'].includes(paymentMethod) ? subtotal * 1.05 : subtotal;
+  const comision = ['paypal', 'tarjeta'].includes(paymentMethod) ? subtotal * 0.05 : 0;
+  return { subtotal, comision, total: subtotal + comision };
 }
 
 // ========== Actualizar Vista del Carrito ==========
@@ -151,9 +152,14 @@ function updateCart() {
     cartList.appendChild(li);
   });
 
-  const total = calcularTotal();
-  document.getElementById('cartTotal').textContent = total.toFixed(2);
+  const { subtotal, comision, total } = calcularTotal();
+  document.getElementById('cartTotal').innerHTML = `
+    <div>Subtotal: S/ ${subtotal.toFixed(2)}</div>
+    ${comision > 0 ? `<div>Comisión (+5%): S/ ${comision.toFixed(2)}</div>` : ''}
+    <div class="font-bold">Total: S/ ${total.toFixed(2)}</div>
+  `;
 }
+
 
 // ========== Pago con Yape ==========
 function mostrarQRYape() {
