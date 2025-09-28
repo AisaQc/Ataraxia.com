@@ -5,7 +5,7 @@ const products = [
   {
     name: 'Combat Noise',
     type: 'Vinilo',
-    price: 1,
+    price: 100,
     description: 'Frontline Offensive Force, 12" Picture',
     includesShipping: true,
     images: [
@@ -18,7 +18,7 @@ const products = [
   {
     name: 'Heretique',
     type: 'Vinilo',
-    price: 1,
+    price: 100,
     description: 'Bestias Hominum, 12" Incluye bonus track',
     options: ['Edición Clasica', 'Edición Picture'],
     includesShipping: false,
