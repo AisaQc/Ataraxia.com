@@ -1,5 +1,4 @@
 // scripts.js
-
 // ========== Datos de Productos ==========
 const products = [
   {
